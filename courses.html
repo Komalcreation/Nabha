@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Courses - Komal Creations</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <h1>Komal Creations</h1>
+        <p>& Training Center</p>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html" data-en="Home" data-pa="ਮੁੱਖ ਪੰਨਾ">Home</a></li>
+          <li><a href="courses.html" class="active" data-en="Courses" data-pa="ਕੋਰਸ">Courses</a></li>
+          <li><a href="gallery.html" data-en="Gallery" data-pa="ਗੈਲਰੀ">Gallery</a></li>
+          <li><a href="contact.html" data-en="Contact" data-pa="ਸੰਪਰਕ">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="langToggle">ਪੰਜਾਬੀ</button>
+    </div>
+  </header>
+
+  <section class="page-banner">
+    <div class="container">
+      <h2 data-en="Our Courses" data-pa="ਸਾਡੇ ਕੋਰਸ">Our Courses</h2>
+    </div>
+  </section>
+
+  <section class="courses container">
+    <div class="course-card">
+      <h3 data-en="Simple Stitching" data-pa="ਸਿੰਪਲ ਸਟਿਚਿੰਗ">Simple Stitching</h3>
+      <p data-en="Simple suits, palazzo, frock, kurtis, simple top"
+         data-pa="ਸਧਾਰਨ ਸੂਟ, ਪਲਾਜ਼ੋ, ਫਰਾਕ, ਕੁਰਤੀ, ਸਧਾਰਨ ਟੌਪ">
+         Simple suits, palazzo, frock, kurtis, simple top
+      </p>
+      <h4>₹800 / <span data-en="Per Month" data-pa="ਪ੍ਰਤੀ ਮਹੀਨਾ">Per Month</span></h4>
+    </div>
+
+    <div class="course-card">
+      <h3 data-en="Hand Embroidery & Painting" data-pa="ਹੱਥ ਕੜਾਹੀ ਅਤੇ ਪੇਂਟਿੰਗ">Hand Embroidery & Painting</h3>
+      <p data-en="Hand embroidery and fabric painting"
+         data-pa="ਹੱਥ ਕੜਾਹੀ ਅਤੇ ਕਪੜੇ ਉੱਤੇ ਪੇਂਟਿੰਗ">
+         Hand embroidery and fabric painting
+      </p>
+      <h4>₹1000 / <span data-en="Per Month" data-pa="ਪ੍ਰਤੀ ਮਹੀਨਾ">Per Month</span></h4>
+    </div>
+
+    <div class="course-card">
+      <h3 data-en="Designer Dresses" data-pa="ਡਿਜ਼ਾਈਨਰ ਡਰੈੱਸਸ">Designer Dresses</h3>
+      <p data-en="Top, shirt, gown and all dresses"
+         data-pa="ਟੌਪ, ਸ਼ਰਟ, ਗਾਊਨ ਅਤੇ ਹੋਰ ਸਾਰੇ ਡਰੈੱਸਸ">
+         Top, shirt, gown and all dresses
+      </p>
+      <h4>₹1500 / <span data-en="Per Month" data-pa="ਪ੍ਰਤੀ ਮਹੀਨਾ">Per Month</span></h4>
+    </div>
+  </section>
+
+  <section class="enroll-section">
+    <div class="container">
+      <h2 data-en="Enroll for a Course" data-pa="ਕੋਰਸ ਲਈ ਦਾਖਲਾ ਲਵੋ">Enroll for a Course</h2>
+      <form class="enroll-form">
+        <input type="text" placeholder="Student Name / ਵਿਦਿਆਰਥੀ ਦਾ ਨਾਮ" required>
+        <input type="text" placeholder="Phone Number / ਫੋਨ ਨੰਬਰ" required>
+        <input type="email" placeholder="Email / ਈਮੇਲ">
+        <select required>
+          <option value="">Select Course / ਕੋਰਸ ਚੁਣੋ</option>
+          <option>Simple Stitching</option>
+          <option>Hand Embroidery & Painting</option>
+          <option>Designer Dresses</option>
+        </select>
+        <button type="submit" class="btn" data-en="Submit Enrollment" data-pa="ਦਾਖਲਾ ਭੇਜੋ">Submit Enrollment</button>
+      </form>
+      <p class="note" data-en="This form is currently frontend only. Backend database can be connected next."
+         data-pa="ਇਹ ਫਾਰਮ ਇਸ ਵੇਲੇ ਸਿਰਫ਼ ਫਰੰਟਐਂਡ ਹੈ। ਬੈਕਐਂਡ ਡੇਟਾਬੇਸ ਅੱਗੇ ਜੋੜਿਆ ਜਾ ਸਕਦਾ ਹੈ।">
+         This form is currently frontend only. Backend database can be connected next.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Komal Creations & Training Center</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

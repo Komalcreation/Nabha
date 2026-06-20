@@ -1,700 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Komal Creation & Training Center</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
-  :root {
-    --primary: #b8336a;
-    --secondary: #e91e63;
-    --accent: #f8bbd0;
-    --gold: #d4a017;
-    --dark: #2c1810;
-    --light: #fff5f8;
-    --gradient: linear-gradient(135deg, #b8336a 0%, #e91e63 100%);
-  }
-  body { background: var(--light); color: var(--dark); line-height: 1.6; }
-
-  nav {
-    background: var(--gradient);
-    padding: 15px 5%;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.15);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .logo { color: white; font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; gap: 10px; }
-  .logo-icon { font-size: 2rem; }
-  .nav-links { display: flex; gap: 5px; flex-wrap: wrap; }
-  .nav-links button {
-    background: transparent;
-    color: white;
-    border: 2px solid transparent;
-    padding: 8px 18px;
-    cursor: pointer;
-    border-radius: 25px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: all 0.3s;
-  }
-  .nav-links button:hover, .nav-links button.active {
-    background: white;
-    color: var(--primary);
-    border-color: white;
-  }
-
-  .page { display: none; animation: fadeIn 0.5s; }
-  .page.active { display: block; }
-  @keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
-
-  .hero {
-    background: linear-gradient(rgba(184,51,106,0.85), rgba(233,30,99,0.85)),
-                url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1600') center/cover;
-    color: white;
-    padding: 100px 5%;
-    text-align: center;
-  }
-  .hero h1 { font-size: 3rem; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
-  .hero p { font-size: 1.3rem; max-width: 700px; margin: 0 auto 30px; }
-  .btn {
-    background: var(--gold);
-    color: white;
-    padding: 14px 35px;
-    border: none;
-    border-radius: 30px;
-    font-size: 1.05rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  }
-  .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
-  .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
-  section { padding: 60px 5%; }
-  .section-title {
-    text-align: center;
-    font-size: 2.3rem;
-    color: var(--primary);
-    margin-bottom: 15px;
-    position: relative;
-  }
-  .section-title::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: var(--gold);
-    margin: 10px auto;
-    border-radius: 2px;
-  }
-  .section-subtitle { text-align: center; color: #666; margin-bottom: 40px; font-size: 1.1rem; }
-
-  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
-  .feature-card {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 5px 20px rgba(184,51,106,0.1);
-    transition: transform 0.3s;
-    border-top: 4px solid var(--primary);
-  }
-  .feature-card:hover { transform: translateY(-8px); }
-  .feature-icon { font-size: 3rem; margin-bottom: 15px; }
-  .feature-card h3 { color: var(--primary); margin-bottom: 10px; }
-
-  .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-  .course-card {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    transition: all 0.3s;
-  }
-  .course-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(184,51,106,0.2); }
-  .course-header {
-    background: var(--gradient);
-    color: white;
-    padding: 25px;
-    text-align: center;
-  }
-  .course-header h3 { font-size: 1.4rem; margin-bottom: 8px; }
-  .course-body { padding: 25px; }
-  .course-info { display: flex; justify-content: space-between; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed #eee; }
-  .course-info span:first-child { color: #888; font-size: 0.9rem; }
-  .course-info span:last-child { font-weight: bold; color: var(--dark); }
-  .course-price { font-size: 1.8rem; color: var(--primary); font-weight: bold; text-align: center; margin: 15px 0; }
-  .course-btn {
-    width: 100%;
-    background: var(--primary);
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s;
-  }
-  .course-btn:hover { background: var(--dark); }
-
-  .form-container {
-    max-width: 700px;
-    margin: 0 auto;
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-  }
-  .form-group { margin-bottom: 20px; }
-  .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: var(--dark); }
-  .form-group input, .form-group select, .form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #eee;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border 0.3s;
-  }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-  }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-
-  .validate-box {
-    max-width: 600px;
-    margin: 0 auto;
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-    text-align: center;
-  }
-  .result-box {
-    margin-top: 25px;
-    padding: 25px;
-    border-radius: 10px;
-    display: none;
-  }
-  .result-box.success { background: #d4edda; border: 2px solid #28a745; color: #155724; display: block; }
-  .result-box.error { background: #f8d7da; border: 2px solid #dc3545; color: #721c24; display: block; }
-  .result-box h3 { margin-bottom: 10px; }
-  .result-box p { margin: 5px 0; }
-
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 1100px; margin: 0 auto; }
-  .contact-info-card {
-    background: var(--gradient);
-    color: white;
-    padding: 40px;
-    border-radius: 15px;
-  }
-  .contact-info-card h3 { margin-bottom: 25px; font-size: 1.5rem; }
-  .contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-  .contact-item-icon { font-size: 1.5rem; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 50%; }
-
-  .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-  .testimonial {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    position: relative;
-  }
-  .testimonial::before {
-    content: '"';
-    font-size: 4rem;
-    color: var(--accent);
-    position: absolute;
-    top: -10px;
-    left: 15px;
-    font-family: Georgia;
-  }
-  .testimonial p { font-style: italic; margin-bottom: 15px; padding-top: 20px; }
-  .testimonial-author { font-weight: bold; color: var(--primary); }
-
-  footer {
-    background: var(--dark);
-    color: white;
-    padding: 40px 5% 20px;
-    text-align: center;
-  }
-  .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left; margin-bottom: 30px; }
-  .footer-col h4 { color: var(--gold); margin-bottom: 15px; }
-  .footer-col p, .footer-col a { color: #ccc; text-decoration: none; display: block; margin-bottom: 8px; }
-  .footer-col a:hover { color: var(--gold); }
-  .footer-bottom { border-top: 1px solid #444; padding-top: 20px; color: #aaa; }
-
-  .alert {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    background: #28a745;
-    color: white;
-    padding: 15px 25px;
-    border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    z-index: 2000;
-    display: none;
-    animation: slideIn 0.4s;
-  }
-  @keyframes slideIn { from {transform: translateX(400px);} to {transform: translateX(0);} }
-
-  .loading {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255,255,255,.3);
-    border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  @media (max-width: 768px) {
-    .hero h1 { font-size: 2rem; }
-    .hero p { font-size: 1rem; }
-    .contact-grid, .form-row { grid-template-columns: 1fr; }
-    .nav-links { width: 100%; justify-content: center; margin-top: 10px; }
-    .nav-links button { padding: 6px 12px; font-size: 0.85rem; }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Komal Creations & Training Center</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-<nav>
-  <div class="logo">
-    <span class="logo-icon">✂️</span>
-    <span>Komal Creation & Training Center</span>
-  </div>
-  <div class="nav-links">
-    <button class="active" onclick="showPage('home', this)">Home</button>
-    <button onclick="showPage('courses', this)">Courses</button>
-    <button onclick="showPage('enroll', this)">Enroll</button>
-    <button onclick="showPage('validate', this)">Verify Certificate</button>
-    <button onclick="showPage('contact', this)">Contact</button>
-  </div>
-</nav>
-
-<div class="alert" id="alertBox"></div>
-
-<div class="page active" id="home">
-  <div class="hero">
-    <h1>✂️ Master the Art of Tailoring</h1>
-    <p>Learn professional tailoring, stitching, and fashion designing from expert trainers.</p>
-    <button class="btn" onclick="showPage('courses', document.querySelectorAll('.nav-links button')[1])">Explore Courses →</button>
-  </div>
-
-  <section>
-    <h2 class="section-title">Why Choose Us</h2>
-    <p class="section-subtitle">We provide hands-on training with expert guidance</p>
-    <div class="features">
-      <div class="feature-card">
-        <div class="feature-icon">👩‍🏫</div>
-        <h3>Expert Trainers</h3>
-        <p>Learn from experienced professionals with years of industry experience.</p>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <h1>Komal Creations</h1>
+        <p>& Training Center</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📜</div>
-        <h3>Certified Courses</h3>
-        <p>Get recognized certificates upon successful completion of each course.</p>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active" data-en="Home" data-pa="ਮੁੱਖ ਪੰਨਾ">Home</a></li>
+          <li><a href="courses.html" data-en="Courses" data-pa="ਕੋਰਸ">Courses</a></li>
+          <li><a href="gallery.html" data-en="Gallery" data-pa="ਗੈਲਰੀ">Gallery</a></li>
+          <li><a href="contact.html" data-en="Contact" data-pa="ਸੰਪਰਕ">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="langToggle">ਪੰਜਾਬੀ</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <h2 data-en="Learn Fashion Designing, Stitching & Embroidery" data-pa="ਫੈਸ਼ਨ ਡਿਜ਼ਾਈਨਿੰਗ, ਸਿਲਾਈ ਅਤੇ ਕੜਾਹੀ ਸਿੱਖੋ">
+          Learn Fashion Designing, Stitching & Embroidery
+        </h2>
+        <p data-en="Join Komal Creations & Training Center to learn professional stitching, pattern making, cutting, designer dresses, hand embroidery, and painting."
+           data-pa="ਕੋਮਲ ਕ੍ਰੀਏਸ਼ਨਜ਼ ਐਂਡ ਟ੍ਰੇਨਿੰਗ ਸੈਂਟਰ ਨਾਲ ਜੁੜੋ ਅਤੇ ਪ੍ਰੋਫੈਸ਼ਨਲ ਸਿਲਾਈ, ਪੈਟਰਨ ਮੇਕਿੰਗ, ਕਟਿੰਗ, ਡਿਜ਼ਾਈਨਰ ਡਰੈੱਸਸ, ਹੱਥ ਕੜਾਹੀ ਅਤੇ ਪੇਂਟਿੰਗ ਸਿੱਖੋ।">
+          Join Komal Creations & Training Center to learn professional stitching, pattern making, cutting, designer dresses, hand embroidery, and painting.
+        </p>
+        <a href="courses.html" class="btn" data-en="View Courses" data-pa="ਕੋਰਸ ਵੇਖੋ">View Courses</a>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🧵</div>
-        <h3>Practical Training</h3>
-        <p>Hands-on practice with modern sewing machines and equipment.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">💼</div>
-        <h3>Job Assistance</h3>
-        <p>Placement support and guidance to start your own boutique.</p>
+      <div class="hero-image">
+        <img src="images/hero.jpg" alt="Komal Creations Training Center">
       </div>
     </div>
   </section>
 
-  <section style="background: white;">
-    <h2 class="section-title">What Our Students Say</h2>
-    <div class="testimonials">
-      <div class="testimonial">
-        <p>Komal ma'am is an excellent teacher. I learned stitching from zero to professional level in just 3 months!</p>
-        <div class="testimonial-author">— Priya Sharma</div>
+  <section class="services container">
+    <h2 data-en="Our Services" data-pa="ਸਾਡੀਆਂ ਸੇਵਾਵਾਂ">Our Services</h2>
+    <div class="service-list">
+      <div class="card">
+        <h3 data-en="Pattern Making & Cutting" data-pa="ਪੈਟਰਨ ਮੇਕਿੰਗ ਅਤੇ ਕਟਿੰਗ">Pattern Making & Cutting</h3>
+        <p data-en="Learn all over pattern making and cutting for ladies suits, palazzo, top, gown and lehenga."
+           data-pa="ਲੇਡੀਜ਼ ਸੂਟ, ਪਲਾਜ਼ੋ, ਟੌਪ, ਗਾਊਨ ਅਤੇ ਲਹਿੰਗਾ ਲਈ ਪੈਟਰਨ ਮੇਕਿੰਗ ਅਤੇ ਕਟਿੰਗ ਸਿੱਖੋ।">
+          Learn all over pattern making and cutting for ladies suits, palazzo, top, gown and lehenga.
+        </p>
       </div>
-      <div class="testimonial">
-        <p>The best training center in town. Practical sessions helped me start my own boutique successfully.</p>
-        <div class="testimonial-author">— Anita Verma</div>
+      <div class="card">
+        <h3 data-en="Hand Embroidery" data-pa="ਹੱਥ ਕੜਾਹੀ">Hand Embroidery</h3>
+        <p data-en="Creative embroidery work and fabric painting classes."
+           data-pa="ਕ੍ਰੀਏਟਿਵ ਕੜਾਹੀ ਕੰਮ ਅਤੇ ਕਪੜੇ ਉੱਤੇ ਪੇਂਟਿੰਗ ਦੀਆਂ ਕਲਾਸਾਂ।">
+          Creative embroidery work and fabric painting classes.
+        </p>
       </div>
-      <div class="testimonial">
-        <p>Very supportive environment. The certificate I got helped me get a job in a reputed fashion house.</p>
-        <div class="testimonial-author">— Sneha Patel</div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<div class="page" id="courses">
-  <section>
-    <h2 class="section-title">Our Courses</h2>
-    <p class="section-subtitle">Choose the course that fits your goals</p>
-    <div class="courses-grid" id="coursesGrid"></div>
-  </section>
-</div>
-
-<div class="page" id="enroll">
-  <section>
-    <h2 class="section-title">Student Enrollment</h2>
-    <p class="section-subtitle">Fill the form below to enroll in your chosen course</p>
-    <div class="form-container">
-      <form id="enrollForm" onsubmit="submitEnrollment(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Full Name *</label>
-            <input type="text" id="fullName" required>
-          </div>
-          <div class="form-group">
-            <label>Phone Number *</label>
-            <input type="tel" id="phone" pattern="[0-9]{10}" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Email Address *</label>
-          <input type="email" id="email" required>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Age *</label>
-            <input type="number" id="age" min="14" max="60" required>
-          </div>
-          <div class="form-group">
-            <label>Gender *</label>
-            <select id="gender" required>
-              <option value="">Select</option>
-              <option>Female</option>
-              <option>Male</option>
-              <option>Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Address *</label>
-          <textarea id="address" rows="2" required></textarea>
-        </div>
-        <div class="form-group">
-          <label>Select Course *</label>
-          <select id="courseSelect" required></select>
-        </div>
-        <div class="form-group">
-          <label>Preferred Batch Timing *</label>
-          <select id="batch" required>
-            <option value="">Select</option>
-            <option>Morning (9 AM - 12 PM)</option>
-            <option>Afternoon (1 PM - 4 PM)</option>
-            <option>Evening (5 PM - 8 PM)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Previous Experience</label>
-          <select id="experience">
-            <option>None (Beginner)</option>
-            <option>Basic Knowledge</option>
-            <option>Intermediate</option>
-          </select>
-        </div>
-        <button type="submit" class="btn" style="width:100%;" id="submitBtn">Submit Enrollment</button>
-      </form>
-    </div>
-  </section>
-</div>
-
-<div class="page" id="validate">
-  <section>
-    <h2 class="section-title">Certificate Validation</h2>
-    <p class="section-subtitle">Verify the authenticity of a student's certificate</p>
-    <div class="validate-box">
-      <div style="font-size: 4rem; margin-bottom: 20px;">🎓</div>
-      <h3 style="color: var(--primary); margin-bottom: 20px;">Enter Certificate Details</h3>
-      <div class="form-group">
-        <label>Certificate Number / Enrollment ID *</label>
-        <input type="text" id="certId" placeholder="e.g., KCTC-2026-001">
-      </div>
-      <div class="form-group">
-        <label>Student Name (for verification)</label>
-        <input type="text" id="certName" placeholder="Enter student's full name">
-      </div>
-      <button class="btn" onclick="validateCertificate()" id="validateBtn">Verify Certificate</button>
-      <div class="result-box" id="resultBox"></div>
-    </div>
-  </section>
-</div>
-
-<div class="page" id="contact">
-  <section>
-    <h2 class="section-title">Contact Us</h2>
-    <p class="section-subtitle">Get in touch for any queries</p>
-    <div class="contact-grid">
-      <div class="contact-info-card">
-        <h3>Get In Touch</h3>
-        <div class="contact-item">
-          <div class="contact-item-icon">📍</div>
-          <div><b>Address</b><br>Komal Creation & Training Center<br>Main Market Road, City Center</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-icon">📞</div>
-          <div><b>Phone</b><br>+91 98765 43210</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-icon">✉️</div>
-          <div><b>Email</b><br>komalcreation@example.com</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-icon">🕐</div>
-          <div><b>Working Hours</b><br>Mon - Sat: 9:00 AM - 8:00 PM<br>Sunday: Closed</div>
-        </div>
-      </div>
-      <div class="form-container" style="margin:0;">
-        <h3 style="color: var(--primary); margin-bottom: 20px;">Send us a Message</h3>
-        <form onsubmit="submitContact(event)">
-          <div class="form-group">
-            <label>Your Name *</label>
-            <input type="text" required>
-          </div>
-          <div class="form-group">
-            <label>Phone *</label>
-            <input type="tel" pattern="[0-9]{10}" required>
-          </div>
-          <div class="form-group">
-            <label>Subject *</label>
-            <input type="text" required>
-          </div>
-          <div class="form-group">
-            <label>Message *</label>
-            <textarea rows="4" required></textarea>
-          </div>
-          <button type="submit" class="btn" style="width:100%;">Send Message</button>
-        </form>
+      <div class="card">
+        <h3 data-en="Designer Dresses" data-pa="ਡਿਜ਼ਾਈਨਰ ਡਰੈੱਸਸ">Designer Dresses</h3>
+        <p data-en="Special training for designer tops, shirts, gowns and all dresses."
+           data-pa="ਡਿਜ਼ਾਈਨਰ ਟੌਪ, ਸ਼ਰਟ, ਗਾਊਨ ਅਤੇ ਹੋਰ ਡਰੈੱਸਸ ਲਈ ਖ਼ਾਸ ਟ੍ਰੇਨਿੰਗ।">
+          Special training for designer tops, shirts, gowns and all dresses.
+        </p>
       </div>
     </div>
   </section>
-</div>
 
-<footer>
-  <div class="footer-content">
-    <div class="footer-col">
-      <h4>✂️ Komal Creation</h4>
-      <p>Your trusted partner in learning the art of tailoring and fashion designing.</p>
+  <section class="why-us">
+    <div class="container">
+      <h2 data-en="Why Choose Us?" data-pa="ਸਾਨੂੰ ਕਿਉਂ ਚੁਣੋ?">Why Choose Us?</h2>
+      <ul>
+        <li data-en="Professional practical training" data-pa="ਪ੍ਰੋਫੈਸ਼ਨਲ ਪ੍ਰੈਕਟੀਕਲ ਟ੍ਰੇਨਿੰਗ">Professional practical training</li>
+        <li data-en="Affordable monthly fees" data-pa="ਵਾਜਬ ਮਹੀਨਾਵਾਰ ਫੀਸ">Affordable monthly fees</li>
+        <li data-en="Bilingual guidance in English and Punjabi" data-pa="ਅੰਗਰੇਜ਼ੀ ਅਤੇ ਪੰਜਾਬੀ ਦੋਵਾਂ ਵਿੱਚ ਸਹਾਇਤਾ">Bilingual guidance in English and Punjabi</li>
+        <li data-en="Future student enrollment and certificate system" data-pa="ਭਵਿੱਖ ਵਿੱਚ ਵਿਦਿਆਰਥੀ ਐਨਰੋਲਮੈਂਟ ਅਤੇ ਸਰਟੀਫਿਕੇਟ ਸਿਸਟਮ">Future student enrollment and certificate system</li>
+      </ul>
     </div>
-    <div class="footer-col">
-      <h4>Quick Links</h4>
-      <a href="#" onclick="showPage('home', document.querySelectorAll('.nav-links button')[0])">Home</a>
-      <a href="#" onclick="showPage('courses', document.querySelectorAll('.nav-links button')[1])">Courses</a>
-      <a href="#" onclick="showPage('enroll', document.querySelectorAll('.nav-links button')[2])">Enroll Now</a>
-      <a href="#" onclick="showPage('contact', document.querySelectorAll('.nav-links button')[4])">Contact</a>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Komal Creations & Training Center</p>
     </div>
-    <div class="footer-col">
-      <h4>Contact Info</h4>
-      <p>📍 Main Market Road, City Center</p>
-      <p>📞 +91 98765 43210</p>
-      <p>✉️ komalcreation@example.com</p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    © 2026 Komal Creation & Training Center. All Rights Reserved.
-  </div>
-</footer>
+  </footer>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDH2QjU1-Aho2QKj-qC0Z4MjVvtPmXELdI",
-    authDomain: "komal-training-center.firebaseapp.com",
-    projectId: "komal-training-center",
-    storageBucket: "komal-training-center.firebasestorage.app",
-    messagingSenderId: "974017571582",
-    appId: "1:974017571582:web:24e78611e2e7afe93113af",
-    measurementId: "G-7ZLH4R30GP"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-
-
-  // Google Apps Script Web App URL (Replace with your deployed URL)
-  const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
-
-  const courses = [
-    { name: "Basic Tailoring", duration: "1 Month", fee: "₹2,500", level: "Beginner", topics: "Hand stitching, Basic machine use, Simple garments" },
-    { name: "Advanced Stitching", duration: "3 Months", fee: "₹6,000", level: "Intermediate", topics: "Blouse, Kurti, Salwar, Trouser stitching" },
-    { name: "Fashion Designing", duration: "6 Months", fee: "₹12,000", level: "Advanced", topics: "Designing, Pattern making, Fashion illustration" },
-    { name: "Boutique Management", duration: "2 Months", fee: "₹4,500", level: "Professional", topics: "Business setup, Client handling, Pricing" },
-    { name: "Embroidery & Zardosi", duration: "2 Months", fee: "₹5,000", level: "Specialized", topics: "Hand embroidery, Zardosi work, Aari work" },
-    { name: "Bridal Wear Specialization", duration: "4 Months", fee: "₹10,000", level: "Expert", topics: "Lehenga, Bridal blouse, Heavy work garments" },
-    { name: "Kids Wear Designing", duration: "2 Months", fee: "₹4,000", level: "Intermediate", topics: "Kids frocks, Party wear, Casual wear" },
-    { name: "Complete Professional Course", duration: "12 Months", fee: "₹20,000", level: "Master", topics: "All-in-one comprehensive tailoring program" }
-  ];
-
-  function loadCourses() {
-    const grid = document.getElementById('coursesGrid');
-    const select = document.getElementById('courseSelect');
-    courses.forEach((c, i) => {
-      grid.innerHTML += `
-        <div class="course-card">
-          <div class="course-header">
-            <h3>${c.name}</h3>
-            <p>${c.level}</p>
-          </div>
-          <div class="course-body">
-            <div class="course-info"><span>⏱ Duration</span><span>${c.duration}</span></div>
-            <div class="course-info"><span>📚 Level</span><span>${c.level}</span></div>
-            <div class="course-info"><span>📖 Topics</span><span style="text-align:right; max-width:60%;">${c.topics}</span></div>
-            <div class="course-price">${c.fee}</div>
-            <button class="course-btn" onclick="enrollInCourse(${i})">Enroll Now</button>
-          </div>
-        </div>`;
-      select.innerHTML += `<option value="${c.name} - ${c.duration} - ${c.fee}">${c.name} (${c.duration}) - ${c.fee}</option>`;
-    });
-  }
-
-  function showPage(pageId, btn) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
-    document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function enrollInCourse(index) {
-    const c = courses[index];
-    showPage('enroll', document.querySelectorAll('.nav-links button')[2]);
-    setTimeout(() => {
-      document.getElementById('courseSelect').value = `${c.name} - ${c.duration} - ${c.fee}`;
-    }, 100);
-  }
-
-  async function submitEnrollment(e) {
-    e.preventDefault();
-    const submitBtn = document.getElementById('submitBtn');
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="loading"></span> Processing...';
-
-    const enrollmentId = 'KCTC-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 900) + 100);
-    const student = {
-      id: enrollmentId,
-      name: document.getElementById('fullName').value,
-      phone: document.getElementById('phone').value,
-      email: document.getElementById('email').value,
-      age: document.getElementById('age').value,
-      gender: document.getElementById('gender').value,
-      address: document.getElementById('address').value,
-      course: document.getElementById('courseSelect').value,
-      batch: document.getElementById('batch').value,
-      experience: document.getElementById('experience').value,
-      enrolledOn: new Date().toISOString().split('T')[0],
-      status: 'Enrolled'
-    };
-
-    try {
-      // Save to Firebase
-      await db.collection('students').doc(enrollmentId).set(student);
-
-      // Save to Google Sheets
-      await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'addStudent', data: student })
-      });
-
-      showAlert(`✅ Enrollment Successful! Your Enrollment ID: ${enrollmentId}`);
-      document.getElementById('enrollForm').reset();
-    } catch (error) {
-      showAlert('❌ Error: ' + error.message);
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = 'Submit Enrollment';
-    }
-  }
-
-  async function validateCertificate() {
-    const id = document.getElementById('certId').value.trim().toUpperCase();
-    const name = document.getElementById('certName').value.trim();
-    const resultBox = document.getElementById('resultBox');
-    const validateBtn = document.getElementById('validateBtn');
-
-    if (!id) {
-      resultBox.className = 'result-box error';
-      resultBox.innerHTML = '<h3>⚠️ Error</h3><p>Please enter a Certificate Number.</p>';
-      return;
-    }
-
-    validateBtn.disabled = true;
-    validateBtn.innerHTML = '<span class="loading"></span> Verifying...';
-
-    try {
-      const doc = await db.collection('students').doc(id).get();
-      
-      if (doc.exists) {
-        const student = doc.data();
-        
-        if (name && student.name.toLowerCase() !== name.toLowerCase()) {
-          resultBox.className = 'result-box error';
-          resultBox.innerHTML = '<h3>❌ Verification Failed</h3><p>Certificate ID is valid but the name does not match.</p>';
-        } else {
-          resultBox.className = 'result-box success';
-          resultBox.innerHTML = `
-            <h3>✅ Certificate Verified - AUTHENTIC</h3>
-            <p><b>Certificate ID:</b> ${student.id}</p>
-            <p><b>Student Name:</b> ${student.name}</p>
-            <p><b>Course:</b> ${student.course}</p>
-            <p><b>Enrolled On:</b> ${student.enrolledOn}</p>
-            <p><b>Status:</b> ${student.status}</p>
-            <p style="margin-top:15px; font-weight:bold;">This certificate is issued by Komal Creation & Training Center.</p>
-          `;
-        }
-      } else {
-        resultBox.className = 'result-box error';
-        resultBox.innerHTML = '<h3>❌ Certificate Not Found</h3><p>No record found for this Certificate Number.</p>';
-      }
-    } catch (error) {
-      resultBox.className = 'result-box error';
-      resultBox.innerHTML = '<h3>❌ Error</h3><p>' + error.message + '</p>';
-    } finally {
-      validateBtn.disabled = false;
-      validateBtn.innerHTML = 'Verify Certificate';
-    }
-  }
-
-  function submitContact(e) {
-    e.preventDefault();
-    showAlert('✅ Thank you! Your message has been sent.');
-    e.target.reset();
-  }
-
-  function showAlert(msg) {
-    const alertBox = document.getElementById('alertBox');
-    alertBox.textContent = msg;
-    alertBox.style.display = 'block';
-    setTimeout(() => { alertBox.style.display = 'none'; }, 5000);
-  }
-
-  loadCourses();
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>

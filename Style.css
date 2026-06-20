@@ -1,0 +1,244 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #fffdf5;
+  color: #1d3b2f;
+  line-height: 1.6;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+header {
+  background: #0e4b3a;
+  color: #fff;
+  padding: 15px 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo h1 {
+  font-size: 28px;
+  color: #f9deb3;
+}
+
+.logo p {
+  font-size: 14px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a.active,
+nav a:hover {
+  color: #f9deb3;
+}
+
+#langToggle {
+  background: #f9deb3;
+  color: #0e4b3a;
+  border: none;
+  padding: 10px 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.hero {
+  background: linear-gradient(to right, #e8f3ed, #fff4de);
+  padding: 60px 0;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero-text h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+  color: #0e4b3a;
+}
+
+.hero-text p {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.hero-image {
+  flex: 1;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+  border: 6px solid #f9deb3;
+}
+
+.btn {
+  display: inline-block;
+  background: #0e4b3a;
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #145c47;
+}
+
+.services, .courses, .gallery, .contact {
+  padding: 60px 0;
+}
+
+.services h2,
+.why-us h2,
+.page-banner h2,
+.enroll-section h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 32px;
+  color: #0e4b3a;
+}
+
+.service-list,
+.courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card, .course-card {
+  background: #fff;
+  border: 2px solid #f2dfbf;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.course-card h4 {
+  margin-top: 15px;
+  color: #145c47;
+}
+
+.why-us {
+  background: #0e4b3a;
+  color: white;
+  padding: 60px 0;
+}
+
+.why-us ul {
+  max-width: 700px;
+  margin: auto;
+}
+
+.why-us li {
+  margin-bottom: 12px;
+}
+
+.page-banner {
+  background: #f9deb3;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.enroll-section {
+  background: #eef7f1;
+  padding: 50px 0;
+}
+
+.enroll-form,
+.contact-form form {
+  display: grid;
+  gap: 15px;
+  max-width: 600px;
+  margin: auto;
+}
+
+input, select, textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.note {
+  margin-top: 15px;
+  text-align: center;
+  color: #555;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  border-radius: 10px;
+  border: 4px solid #f9deb3;
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+footer {
+  background: #0e4b3a;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+@media(max-width: 768px) {
+  .hero-content,
+  .contact {
+    grid-template-columns: 1fr;
+    display: block;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .hero-text h2 {
+    font-size: 28px;
+  }
+}
